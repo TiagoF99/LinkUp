@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">pickup</string>
+    <string name="login">Already Registered? Click Here to Login!</string>
 </resources>
