@@ -10,7 +10,7 @@ public class WordViewModel extends AndroidViewModel {
 
     private WordRepository mRepository;
 
-    private LiveData<List<Word>> mAllWords;
+    private List<Word> mAllWords;
 
     public WordViewModel (Application application) {
         super(application);
@@ -18,7 +18,7 @@ public class WordViewModel extends AndroidViewModel {
         mAllWords = mRepository.getAllWords();
     }
 
-    LiveData<List<Word>> getAllWords() { return mAllWords; }
+    List<Word> getAllWords() { return mAllWords; }
 
     public void insert(Word word) { mRepository.insert(word); }
 }
