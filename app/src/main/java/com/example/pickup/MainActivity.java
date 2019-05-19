@@ -13,12 +13,22 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private WordRepository repo;
+    List<com.example.pickup.Word> words;
+    private WordViewModel viewing;
+
+    private EditText username;
+    private EditText password;
+    private EditText age;
+    private EditText gender;
+
 
 
     @Override
@@ -26,17 +36,56 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        age = findViewById(R.id.Age);
+        gender = findViewById(R.id.Gender);
 
-        List<com.example.pickup.Word> words = WordRoomDatabase.getDatabase(getApplicationContext()).wordDao().getAllWords();
-        for (int i = 0; i < words.size(); i++) {
-            Log.d("WORD", words.get(i).toString());
-        }
-
-
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                viewing = new WordViewModel(getApplication());
+                words = viewing.getAllWords();
+            }
+        });
     }
 
 
     public void registerAccount(View view) {
+
+//        boolean found = false;
+//        for (int i=0; i < words.size(); i++) {
+//            if (words.get(i).getWord().startsWith(username.getText().toString())) {
+//                found = true;
+//            }
+//        }
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                viewing.insert(new Word("tiago"));
+            }
+        });
+
+
+        Toast.makeText(this, words.toString(), Toast.LENGTH_LONG).show();
+
+//        final String new_person = username + " " + password + " " + age + " " + gender;
+//        if (!found) {
+//            AsyncTask.execute(new Runnable() {
+//                @Override
+//                public void run() {
+//                    viewing.insert(new Word(new_person));
+//                }
+//            });
+//            Intent intent = new Intent(this, SplashPage.class);
+//            intent.putExtra("info", new_person);
+//            startActivity(intent);
+//        } else {
+//            Toast toast = new Toast(this);
+//            toast.setText("Username is already taken.");
+//            toast.show();
+//        }
 
 
     }
@@ -44,29 +93,5 @@ public class MainActivity extends AppCompatActivity {
     public void toLogin(View view) {
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
-    }
-
-    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
-
-        private final WordDao mDao;
-        String[] words = {"dolphin", "crocodile", "cobra"};
-
-        PopulateDbAsync(WordRoomDatabase db) {
-            mDao = db.wordDao();
-        }
-
-        @Override
-        protected Void doInBackground(final Void... params) {
-            // Start the app with a clean database every time.
-            // Not needed if you only populate the database
-            // when it is first created
-            mDao.deleteAll();
-
-            for (int i = 0; i <= words.length - 1; i++) {
-                Word word = new Word(words[i]);
-                mDao.insert(word);
-            }
-            return null;
-        }
     }
 }

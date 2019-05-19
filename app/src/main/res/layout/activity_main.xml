@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="385dp"
-        android:layout_height="434dp"
+        android:layout_height="491dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -29,10 +29,11 @@
             android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/fullname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10sp"
-            android:backgroundTint="#B100FF" />
+            android:backgroundTint="#00FFE7" />
 
         <TextView
             android:layout_width="match_parent"
@@ -42,6 +43,7 @@
             android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10sp"
@@ -55,10 +57,40 @@
             android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10sp"
             android:backgroundTint="#00FFE7" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Age"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/Age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:backgroundTint="#00FFE7" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gender"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/Gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:backgroundTint="#00FFE7" />
+
 
         <Button
             android:layout_width="wrap_content"
@@ -69,38 +101,39 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30sp"
             android:gravity="center"
             android:onClick="toLogin"
             android:text="@string/login"
             android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="247dp"
         android:layout_height="98dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="235dp"
+        android:id="@+id/register"
+        android:layout_width="382dp"
         android:layout_height="41dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Register"
-        android:textSize="30sp"
-        android:textColor="#FFFFFF"
         android:gravity="center"
+        android:text="Register"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>
