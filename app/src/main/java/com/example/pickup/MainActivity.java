@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         | gender.getText() == null | age.getText() == null) {
             Toast.makeText(this, "Fill in all the fields.", Toast.LENGTH_LONG).show();
         } else {
-            final String new_person = username + " " + password + " " + age + " " + gender;
+            final String new_person = username + " " + password + " " + fullname + " " + age + " " + gender;
             if (!found) {
                 AsyncTask.execute(new Runnable() {
                     @Override

@@ -13,6 +13,8 @@ public class SplashPage extends AppCompatActivity {
     private ImageView plan;
     private ImageView account;
 
+    String info;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,8 @@ public class SplashPage extends AppCompatActivity {
         create = findViewById(R.id.create);
         plan = findViewById(R.id.plan);
         account = findViewById(R.id.account);
+
+        info = getIntent().getStringExtra("info");
     }
 
     public void exploreClicked(View view) {
@@ -39,5 +43,8 @@ public class SplashPage extends AppCompatActivity {
     }
 
     public void clickAccount(View view) {
+        Intent intent = new Intent(this, UserAccount.class);
+        intent.putExtra("info", info);
+        startActivity(intent);
     }
 }
