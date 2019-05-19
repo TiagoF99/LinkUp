@@ -41,27 +41,24 @@ public class createEvent extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(43.6578553,-79.378907)));
+        mMap.setMinZoomPreference(3);
 
-        // Add a marker in Sydney and move the camera
+        mMap.setOnMapClickListener(point -> {
+            LatLng city = new LatLng(point.latitude, point.longitude);
+            mMap.addMarker(new MarkerOptions().position(city).title("Event Marker"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(point.latitude,point.longitude)));
 
-
-
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
-            public void onMapClick(LatLng point){
-                LatLng city = new LatLng(point.latitude, point.longitude);
-                mMap.addMarker(new MarkerOptions().position(city).title("Event Marker"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(city));
-                try {
-                    Thread.sleep(2500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                Intent intent = new Intent(getApplicationContext(), CreateInfo.class);
-                intent.putExtra("lat", point.latitude);
-                intent.putExtra("long", point.longitude);
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        });
 
+            Intent intent = new Intent(getApplicationContext(), CreateInfo.class);
+            intent.putExtra("lat", point.latitude);
+            intent.putExtra("long", point.longitude);
+            startActivity(intent);
+        });
     }
 }

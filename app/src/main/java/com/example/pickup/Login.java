@@ -27,7 +27,7 @@ public class Login extends AppCompatActivity {
         String info = "";
         boolean found = false;
         for (int i=0; i < MainActivity.words.size(); i++) {
-            if (MainActivity.words.get(i).getWord().startsWith(username.getText().toString())) {
+            if (MainActivity.viewing.getAllWords().get(i).getWord().startsWith(username.getText().toString())) {
                 found = true;
                 info = MainActivity.words.get(i).getWord();
             }
@@ -40,6 +40,7 @@ public class Login extends AppCompatActivity {
                 Intent intent = new Intent(this, SplashPage.class);
                 intent.putExtra("info", info);
                 startActivity(intent);
+                finish();
             } else {
                 Toast.makeText(this, "Username is not found.", Toast.LENGTH_LONG).show();
             }

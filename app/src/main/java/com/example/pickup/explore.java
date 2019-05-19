@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,6 +23,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static java.lang.Math.PI;
 
@@ -31,11 +36,14 @@ public class explore extends FragmentActivity implements OnMapReadyCallback {
     private LocationListener listener;
     public double current_latitude;
     public double current_longitude;
+    public static List<Word> words;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
+
+        AsyncTask.execute(() -> words = MainActivity.viewing.getAllWords());
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -47,15 +55,16 @@ public class explore extends FragmentActivity implements OnMapReadyCallback {
 
             @Override
             public void onLocationChanged(Location location) {
-                current_latitude = location.getLatitude();
-                current_longitude = location.getLongitude();
+
             }
 
             @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {}
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+            }
 
             @Override
-            public void onProviderEnabled(String s) {}
+            public void onProviderEnabled(String s) {
+            }
 
             @Override
             public void onProviderDisabled(String s) {
@@ -110,18 +119,22 @@ public class explore extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(current_latitude,current_longitude)));
+        mMap.setMinZoomPreference(3);
 
-        for (int i=0; i < MainActivity.words.size(); i++) {
-            if (MainActivity.words.get(i).getWord().split(" ").length == 3) {
-                String[] info = MainActivity.words.get(i).getWord().split(" ");
-                int distance = (int) distanceCoordinates(current_latitude, current_longitude, Double.parseDouble(info[0]), Double.parseDouble(info[1]));
-                if (distance <= 10) {
-                    LatLng sydney = new LatLng(Double.parseDouble(info[0]), Double.parseDouble(info[1]));
-                    mMap.addMarker(new MarkerOptions().position(sydney)
-                            .title(info[2])
-                            .infoWindowAnchor(5,5));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-                }
+        for (int i=0; i < words.size(); i++) {
+            Log.d("DEBUG", "MADE IT INTO EXPLORE ONMAP READY");
+            if (words.get(i).getWord().split(" ").length == 3) {
+                String[] info = words.get(i).getWord().split(" ");
+                //int distance = (int) distanceCoordinates(current_latitude, current_longitude, Double.parseDouble(info[0]), Double.parseDouble(info[1]));
+                //if (distance <= 50) {
+                Log.d("DEBUG", Arrays.toString(info));
+                LatLng city = new LatLng(Double.parseDouble(info[0]), Double.parseDouble(info[1]));
+                mMap.addMarker(new MarkerOptions().position(city)
+                        .title(info[2]));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(city));
+                mMap.setMaxZoomPreference(3);
+                //}
 
             }
         }

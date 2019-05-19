@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class exploreInfo extends AppCompatActivity {
 
@@ -24,6 +25,8 @@ public class exploreInfo extends AppCompatActivity {
 
     public void joinEvent(View view) {
         Intent intent = new Intent(this, SplashPage.class);
+        Toast.makeText(this, "You have succesfully joined the event!", Toast.LENGTH_LONG).show();
         startActivity(intent);
+        finish();
     }
 }

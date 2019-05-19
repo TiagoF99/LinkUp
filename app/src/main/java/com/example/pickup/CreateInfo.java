@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class CreateInfo extends AppCompatActivity {
 
@@ -25,16 +26,15 @@ public class CreateInfo extends AppCompatActivity {
         int longitude = getIntent().getIntExtra("long", -79);
         String data = name.getText().toString();
 
-        final String database_info = lat + " " + longitude + " " + name;
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                MainActivity.viewing.insert(new Word(database_info));
-            }
-        });
+        final String database_info = lat + " " + longitude + " " + data;
+        AsyncTask.execute(() -> MainActivity.viewing.insert(new Word(database_info)));
 
         Intent intent = new Intent(this, SplashPage.class);
+
+        Toast.makeText(this, "Event has been created!", Toast.LENGTH_LONG).show();
+
         startActivity(intent);
+        finish();
     }
 
     /*

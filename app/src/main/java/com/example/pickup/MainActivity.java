@@ -66,17 +66,14 @@ public class MainActivity extends AppCompatActivity {
         | gender.getText() == null | age.getText() == null) {
             Toast.makeText(this, "Fill in all the fields.", Toast.LENGTH_LONG).show();
         } else {
-            final String new_person = username + " " + password + " " + fullname + " " + age + " " + gender;
+            final String new_person = username.getText().toString() + " " + password.getText().toString() + " " +
+                    fullname.getText().toString() + " " + age.getText().toString() + " " + gender.getText().toString();
             if (!found) {
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        viewing.insert(new Word(new_person));
-                    }
-                });
+                AsyncTask.execute(() -> viewing.insert(new Word(new_person)));
                 Intent intent = new Intent(this, SplashPage.class);
                 intent.putExtra("info", new_person);
                 startActivity(intent);
+                finish();
             } else {
                 Toast.makeText(this, "Username is already taken.", Toast.LENGTH_LONG).show();
             }

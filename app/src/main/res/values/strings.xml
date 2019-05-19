@@ -4,4 +4,10 @@
     <string name="title_activity_explore">Map</string>
     <string name="title_activity_map">Map</string>
     <string name="title_activity_create_event">Map</string>
+    <string name="your_account">Your Account</string>
+    <string name="terry_hughes">Terry Hughes</string>
+    <string name="age_32">Age: 32</string>
+    <string name="gender_male">Gender: Male</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="logout">Logout</string>
 </resources>
