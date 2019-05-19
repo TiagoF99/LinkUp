@@ -126,14 +126,13 @@ public class explore extends FragmentActivity implements OnMapReadyCallback {
             Log.d("DEBUG", "MADE IT INTO EXPLORE ONMAP READY");
             if (words.get(i).getWord().split(" ").length == 3) {
                 String[] info = words.get(i).getWord().split(" ");
+                Log.d("DEBUG", words.toString());
                 //int distance = (int) distanceCoordinates(current_latitude, current_longitude, Double.parseDouble(info[0]), Double.parseDouble(info[1]));
                 //if (distance <= 50) {
                 Log.d("DEBUG", Arrays.toString(info));
                 LatLng city = new LatLng(Double.parseDouble(info[0]), Double.parseDouble(info[1]));
-                mMap.addMarker(new MarkerOptions().position(city)
-                        .title(info[2]));
+                mMap.addMarker(new MarkerOptions().position(city).title(info[2]));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(city));
-                mMap.setMaxZoomPreference(3);
                 //}
 
             }

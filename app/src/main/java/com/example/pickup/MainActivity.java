@@ -43,12 +43,11 @@ public class MainActivity extends AppCompatActivity {
         gender = findViewById(R.id.Gender);
         fullname = findViewById(R.id.fullname);
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                viewing = new WordViewModel(getApplication());
-                words = viewing.getAllWords();
-            }
+
+
+        AsyncTask.execute(() -> {
+            viewing = new WordViewModel(getApplication());
+            words = viewing.getAllWords();
         });
     }
 
