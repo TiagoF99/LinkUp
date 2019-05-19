@@ -4,6 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashPage">
+    tools:context=".SplashPage"
+    android:background="@drawable/splashbackground"
+    >
 
+    <ImageView
+        android:id="@+id/explore"
+        android:layout_width="334dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/exploreunclicked"
+        android:onClick="exploreClicked"/>
+
+    <ImageView
+        android:id="@+id/create"
+        android:layout_width="334dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/explore"
+        app:srcCompat="@drawable/createeventunclicked"
+        android:onClick="createClicked"/>
+
+    <ImageView
+        android:id="@+id/plan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create"
+        app:srcCompat="@drawable/planeventunclicked"
+        android:onClick="planClicked"/>
+
+    <ImageView
+        android:id="@+id/account"
+        android:layout_width="181dp"
+        android:layout_height="91dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/account"
+        android:onClick="clickAccount"/>
 </android.support.constraint.ConstraintLayout>
