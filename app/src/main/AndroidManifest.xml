@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".UserAccount"></activity>
+        <activity android:name=".exploreInfo"></activity>
+        <activity android:name=".CreateInfo" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -30,9 +31,12 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAZ0qi6Wugylr3kgVUcIouAfj1hdLOK50M " />
+            android:value="@string/google_maps_key" />
 
-        <activity android:name=".createEvent" />
+        <activity
+            android:name=".createEvent"
+            android:label="@string/title_activity_create_event" />
+        <activity android:name=".UserAccount" />
         <activity android:name=".SplashPage" />
         <activity
             android:name=".explore"

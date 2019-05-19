@@ -36,6 +36,9 @@ public class SplashPage extends AppCompatActivity {
 
     public void createClicked(View view) {
         create.setImageResource(R.drawable.createeventclicked);
+        Intent intent = new Intent(this, createEvent.class);
+        startActivity(intent);
+
     }
 
     public void planClicked(View view) {

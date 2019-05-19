@@ -13,10 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,37 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import android.Manifest;
-
-import android.content.Intent;
-
-import android.content.pm.PackageManager;
-
-import android.location.Location;
-
-import android.location.LocationListener;
-
-import android.location.LocationManager;
-
-import android.os.Build;
-
-import android.os.Bundle;
-
-import android.provider.Settings;
-
-import android.support.annotation.NonNull;
-
-import android.support.annotation.Nullable;
-
-import android.support.v4.app.ActivityCompat;
-
-import android.support.v7.app.AppCompatActivity;
-
-import android.view.View;
-
-import android.widget.Button;
-
-import android.widget.TextView;
+import static java.lang.Math.PI;
 
 public class explore extends FragmentActivity implements OnMapReadyCallback {
 
@@ -100,7 +67,6 @@ public class explore extends FragmentActivity implements OnMapReadyCallback {
     }
 
     @Override
-
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
         switch (requestCode) {
@@ -145,12 +111,43 @@ public class explore extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney)
-                .title("Marker in Sydney")
-                .infoWindowAnchor(5,5));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        for (int i=0; i < MainActivity.words.size(); i++) {
+            if (MainActivity.words.get(i).getWord().split(" ").length == 3) {
+                String[] info = MainActivity.words.get(i).getWord().split(" ");
+                int distance = (int) distanceCoordinates(current_latitude, current_longitude, Double.parseDouble(info[0]), Double.parseDouble(info[1]));
+                if (distance <= 10) {
+                    LatLng sydney = new LatLng(Double.parseDouble(info[0]), Double.parseDouble(info[1]));
+                    mMap.addMarker(new MarkerOptions().position(sydney)
+                            .title(info[2])
+                            .infoWindowAnchor(5,5));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                }
+
+            }
+        }
+
+        mMap.setOnMarkerClickListener(marker -> {
+            Intent intent = new Intent(this, exploreInfo.class);
+            intent.putExtra("title", marker.getTitle());
+            startActivity(intent);
+            return true;
+        });
+
+    }
+
+    public double distanceCoordinates(double lat1, double lon1, double lat2, double lon2) {
+        double earthRadiusKm = 6371.0;
+
+        double dLat = PI/180*(lat2-lat1);
+        double dLon = PI/180*(lon2-lon1);
+
+        lat1 = PI/180*(lat1);
+        lat2 = PI/180*(lat2);
+
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return earthRadiusKm * c;
     }
 }
 

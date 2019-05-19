@@ -3,4 +3,5 @@
     <string name="login">Already Registered? Click Here to Login!</string>
     <string name="title_activity_explore">Map</string>
     <string name="title_activity_map">Map</string>
+    <string name="title_activity_create_event">Map</string>
 </resources>
