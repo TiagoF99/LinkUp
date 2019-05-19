@@ -35,6 +35,8 @@ public class WordRepository {
 
         @Override
         protected Void doInBackground(final Word... params) {
+            mAsyncTaskDao.deleteAll();
+
             mAsyncTaskDao.insert(params[0]);
             return null;
         }

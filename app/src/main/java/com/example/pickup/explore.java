@@ -147,6 +147,9 @@ public class explore extends FragmentActivity implements OnMapReadyCallback {
 
     }
 
+    /*
+    This method gets the distance between two coordinate points and returns it in km
+     */
     public double distanceCoordinates(double lat1, double lon1, double lat2, double lon2) {
         double earthRadiusKm = 6371.0;
 

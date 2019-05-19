@@ -22,11 +22,12 @@ public class CreateInfo extends AppCompatActivity {
 
     public void createEvent(View view) {
 
-        int lat = getIntent().getIntExtra("lat", 43);
-        int longitude = getIntent().getIntExtra("long", -79);
+        double lat = getIntent().getDoubleExtra("lat", 43.5);
+        double longitude = getIntent().getDoubleExtra("long", -79.2);
         String data = name.getText().toString();
 
-        final String database_info = lat + " " + longitude + " " + data;
+
+        final String database_info = Double.toString(lat) + " " + Double.toString(longitude) + " " + data;
         AsyncTask.execute(() -> MainActivity.viewing.insert(new Word(database_info)));
 
         Intent intent = new Intent(this, SplashPage.class);
